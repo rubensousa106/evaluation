@@ -1,9 +1,9 @@
 package com.example.evaluation.controller;
 
-import com.example.evaluation.user.User;
-import com.example.evaluation.user.UserRepository;
-import com.example.evaluation.user.UserRequestDTO;
-import com.example.evaluation.user.UserResponseDTO;
+import com.example.evaluation.domain.user.User;
+import com.example.evaluation.repository.UserRepository;
+import com.example.evaluation.domain.user.UserRequestDTO;
+import com.example.evaluation.domain.user.UserResponseDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +23,8 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+
 
     @GetMapping("all")
     public List<UserResponseDTO> getAll() {

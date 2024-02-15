@@ -1,9 +1,8 @@
-package com.example.evaluation.user;
+package com.example.evaluation.domain.user;
 
 import java.time.LocalDate;
-import java.util.Date;
 
-public record UserResponseDTO(Long id, String username, String password, String email, Byte role,
+public record UserResponseDTO(Long id, String username, String password, String email, UserRole role,
                               LocalDate dateOfRegistration) {
 
     public UserResponseDTO(User user) {
