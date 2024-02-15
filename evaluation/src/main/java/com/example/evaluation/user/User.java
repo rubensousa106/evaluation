@@ -1,13 +1,10 @@
 package com.example.evaluation.user;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+
 import java.time.LocalDate;
-import java.util.Date;
 
 @Table(name = "users")
 @Entity(name = "users")
@@ -17,10 +14,10 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class User {
-    @Getter
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
     private String username;
     private String password;
     private String email;
