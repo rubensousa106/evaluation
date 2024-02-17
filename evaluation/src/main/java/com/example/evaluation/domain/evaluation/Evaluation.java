@@ -32,7 +32,6 @@ public class Evaluation {
     private String statusAvaliacao; //Pode indicar se a avaliação está pendente, concluída ou em andamento.
 
 
-
     public Evaluation(EvaluationRequestDTO data) {
         this.idDocenteNaoDocente = data.idDocenteNaoDocente();
         this.idAvaliador = data.idAvaliador();

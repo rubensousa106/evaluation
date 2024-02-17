@@ -25,7 +25,6 @@ public class UserController {
     private UserRepository userRepository;
 
 
-
     @GetMapping("all")
     public List<UserResponseDTO> getAll() {
         //List<User> userList = userRepository.findAll();
@@ -46,6 +45,7 @@ public class UserController {
         User userData = new User(data);
         userRepository.save(userData);
     }
+
     @DeleteMapping("remove/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         Optional<User> userOptional = userRepository.findById(id);

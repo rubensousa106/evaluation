@@ -17,7 +17,7 @@ public class EvaluationApplication {
 
 	@Configuration
 	@EnableWebMvc
-	public class WebConfig implements WebMvcConfigurer {
+	class WebConfig implements WebMvcConfigurer {
 
 		@Override
 		public void addCorsMappings(CorsRegistry registry) {

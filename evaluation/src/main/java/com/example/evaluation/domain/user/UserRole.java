@@ -8,7 +8,7 @@ public enum UserRole {
     ADMIN("admin"),
     USER("user"),
     TEACHER("teacher"),
-    NON_TEACHER("non-teacher");
+    NON_TEACHER("non_teacher");
 
     private final String role;
 

@@ -23,6 +23,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+
     private String username;
     private String password;
     private String email;
@@ -36,6 +37,12 @@ public class User implements UserDetails {
         this.email = data.email();
         this.role = data.role();
         this.dateOfRegistration = data.dateOfRegistration();
+    }
+
+    public User(String login,String password, UserRole role) {
+        this.username = login;
+        this.password = password;
+        this.role = role;
     }
 
     @Override

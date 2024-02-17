@@ -4,9 +4,7 @@ package com.example.evaluation.controller;
 import com.example.evaluation.domain.evaluation.Evaluation;
 import com.example.evaluation.domain.evaluation.EvaluationRequestDTO;
 import com.example.evaluation.domain.evaluation.EvaluationResponseDTO;
-
 import com.example.evaluation.repository.EvaluationRepository;
-import com.example.evaluation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
