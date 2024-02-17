@@ -23,13 +23,13 @@ import static java.rmi.server.LogStream.log;
 public class SecurityConfiguration  {
 
 
-
+   
    private final SecurityFilter securityFilter;
 
     @Autowired
     private UserDetailsService userDetailsService;
 
-    
+
 
     /*@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
