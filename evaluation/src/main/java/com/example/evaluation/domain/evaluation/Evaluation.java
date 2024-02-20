@@ -1,12 +1,9 @@
 package com.example.evaluation.domain.evaluation;
 
-import com.example.evaluation.domain.user.UserRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Table(name = "evaluations")
 @Entity(name = "evaluations")
@@ -29,7 +26,7 @@ public class Evaluation {
     private int pontuacao4;
     private int pontuacao5;
     private String comentario;
-    private String statusAvaliacao; //Pode indicar se a avaliação está pendente, concluída ou em andamento.
+    private String statusAvaliacao; //Pode indicar se a avaliação está pendente, concluída ou em andamento. Deve ser um enum.
 
 
     public Evaluation(EvaluationRequestDTO data) {
