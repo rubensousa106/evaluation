@@ -1,18 +1,16 @@
 package com.example.evaluation.controller;
 
-import com.example.evaluation.authentication.AuthenticationRequest;
-import com.example.evaluation.authentication.AuthenticationResponse;
-import com.example.evaluation.authentication.AuthenticationService;
-import com.example.evaluation.authentication.RegisterRequest;
 import com.example.evaluation.domain.user.User;
+import com.example.evaluation.repository.UserRepository;
 import com.example.evaluation.domain.user.UserRequestDTO;
 import com.example.evaluation.domain.user.UserResponseDTO;
-import com.example.evaluation.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -25,10 +23,6 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    AuthenticationService authService;
-
 
 
     @GetMapping("all")
@@ -44,32 +38,6 @@ public class UserController {
         Optional<User> userOptional = userRepository.findById(id);
         return userOptional.map(user -> ResponseEntity.ok(new UserResponseDTO(user)))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
-    }
-
-    /**
-     * METODO TEMPORARIO, APENAS PARA TESTAR O REGISTO DE UTILIZADORES
-     * SE FUNCIONAR, APAGAR O METODO SAVEUSER()
-     * Endpoint para registar um utilizador
-     * @param request
-     * @return  AuthenticationResponse
-     */
-    @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) { // RegisterRequest is a DTO, mudar dps
-        return ResponseEntity.ok(authService.register(request));
-    }
-
-    /**
-     * METODO TEMPORARIO, APENAS PARA TESTAR
-     * Endpoint para autenticar um utilizador
-     * @param request
-     * @return AuthenticationResponse
-     */
-
-    @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request) {
-        System.out.println("Metodo authenticate() de UserController executado.");
-        return ResponseEntity.ok(authService.authenticate(request));
     }
 
     @PostMapping("create")
@@ -98,7 +66,7 @@ public class UserController {
             User existingUser = userOptional.get();
 
             // Crie um novo registro com base no existente e os dados fornecidos em UserRequestDTO
-            User updatedUser = new User(existingUser.getId(), data.username(), data.password(), data.email(),  data.dateOfRegistration(),data.role());
+            User updatedUser = new User(existingUser.getId(), data.username(), data.password(), data.email(), data.role(), data.dateOfRegistration());
 
             userRepository.save(updatedUser);
 
@@ -107,4 +75,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado com o ID: " + id);
         }
     }
+
+
 }

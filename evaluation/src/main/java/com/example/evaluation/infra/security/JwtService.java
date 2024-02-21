@@ -32,7 +32,6 @@ public class JwtService {
      * metodo para gerar um token
      * @param extraClaims
      * @param userDetails
-     * @return
      */
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return Jwts
@@ -79,7 +78,6 @@ public class JwtService {
 
     /**
      * metodo para obter a chave de assinatura
-     *
      */
     private Key getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
