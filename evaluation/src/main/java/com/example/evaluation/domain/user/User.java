@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 @Data
 @Builder
@@ -51,15 +52,14 @@ public class User implements UserDetails {
 
 
 
-    //ver quais sao as roles que o utilizador tem
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-       /* if (this.role == UserRole.ADMIN) {
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        } else return List.of(new SimpleGrantedAuthority("ROLE_USER"));*/
-
-
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+        if (this.role != null) {
+            return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     @Override

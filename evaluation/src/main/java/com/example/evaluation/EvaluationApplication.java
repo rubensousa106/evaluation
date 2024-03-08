@@ -22,7 +22,7 @@ public class EvaluationApplication {
 		@Override
 		public void addCorsMappings(CorsRegistry registry) {
 			registry.addMapping("/**")
-					.allowedOrigins("http://localhost:59688")
+					.allowedOrigins("http://localhost:4200")
 					.allowedMethods("GET", "POST", "PUT", "DELETE")
 					.allowedHeaders("*")
 					.exposedHeaders("Access-Control-Allow-Origin");

@@ -6,6 +6,8 @@ import com.example.evaluation.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +18,6 @@ import java.time.LocalDate;
 public class AuthenticationService {
 
     private final UserRepository userRepository;
-
-    //private final PasswordEncoder passwordEncoder;
-
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
@@ -26,10 +25,9 @@ public class AuthenticationService {
     public AuthenticationResponse register(RegisterRequest request) {
         var user = com.example.evaluation.domain.user.User.builder() //ele estava a ir buscar o user do pacote errado
                 .username(request.getUsername())
-                //.password(passwordEncoder.encode(request.getPassword()))
                 .password(passwordEncoder(request.getPassword()))
                 .email(request.getEmail())
-                .role(com.example.evaluation.domain.user.UserRole.USER)
+                .role(request.getRole())
                 .dateOfRegistration(LocalDate.now())
                 .build();
         userRepository.save(user);
@@ -41,14 +39,19 @@ public class AuthenticationService {
 
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        try{
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
                         request.getPassword()
                 ) // se nao conseguir autenticar, lanca excecao
         );
+        } catch (AuthenticationException e) {
+            // Lidar com falha na autenticação, por exemplo, lançando uma exceção personalizada
+            throw new AuthenticationFailedException("Falha na autenticação", e);
+        }
         var user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow();
+                .orElseThrow(() -> new UsernameNotFoundException("Username não encontrado"));
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
@@ -61,4 +64,13 @@ public class AuthenticationService {
     }
 
 
+    public String checkUser(String token) {
+        return jwtService.extractUsername(token);
+    }
+
+    public static class AuthenticationFailedException extends RuntimeException {
+        public AuthenticationFailedException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
 }
