@@ -10,25 +10,22 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 public class EvaluationApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(EvaluationApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(EvaluationApplication.class, args);
+    }
 
 
-	@Configuration
-	@EnableWebMvc
-	public class WebConfig implements WebMvcConfigurer {
+    @Configuration
+    @EnableWebMvc
+    public class WebConfig implements WebMvcConfigurer {
 
-		@Override
-		public void addCorsMappings(CorsRegistry registry) {
-			registry.addMapping("/**")
-					.allowedOrigins("http://localhost:4200")
-					.allowedMethods("GET", "POST", "PUT", "DELETE")
-					.allowedHeaders("*")
-					.exposedHeaders("Access-Control-Allow-Origin");
-		}
-	}
-
-
-
+        @Override
+        public void addCorsMappings(CorsRegistry registry) {
+            registry.addMapping("/**")
+                    .allowedOrigins("http://localhost:4200")
+                    .allowedMethods("GET", "POST", "PUT", "DELETE")
+                    .allowedHeaders("*")
+                    .exposedHeaders("Access-Control-Allow-Origin");
+        }
+    }
 }
