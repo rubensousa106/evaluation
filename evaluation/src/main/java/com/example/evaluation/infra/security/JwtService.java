@@ -19,7 +19,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    //chave hexadecimal de 256 bits aleatoria
+    //random key hexadecimal of 256 bits
     private static final String SECRET_KEY = "c5a2f9d847e831b4104d32a8e3c7b6af7113e70a44e858369f7fe710826c9423";
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtService.class);
 

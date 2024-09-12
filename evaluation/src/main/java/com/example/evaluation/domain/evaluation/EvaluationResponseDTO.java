@@ -3,11 +3,40 @@ package com.example.evaluation.domain.evaluation;
 import java.time.LocalDate;
 import java.util.Date;
 
-public record EvaluationResponseDTO(Long idAvaliacao, Long idDocenteNaoDocente, Long idAvaliador,
-                                    LocalDate dataAvaliacao, int pontuacao1, int pontuacao2, int pontuacao3,
-                                    int pontuacao4, int pontuacao5, String comentario, String statusAvaliacao) {
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
-        public EvaluationResponseDTO(Evaluation evaluation) {
-            this(evaluation.getIdAvaliacao(), evaluation.getIdDocenteNaoDocente(), evaluation.getIdAvaliador(), evaluation.getDataAvaliacao(), evaluation.getPontuacao1(), evaluation.getPontuacao2(), evaluation.getPontuacao3(), evaluation.getPontuacao4(), evaluation.getPontuacao5(), evaluation.getComentario(), evaluation.getStatusAvaliacao());
-        }
+/*
+REFORMULAR
+ */
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public record EvaluationResponseDTO(
+        Long evaluationId,
+        Long evaluatedId,
+        Long evaluatorId,
+        LocalDate evaluationDate,
+        List<EvaluationScoreDTO> scores,
+        String comment,
+        String evaluationStatus
+) {
+    public EvaluationResponseDTO(Evaluation evaluation) {
+        this(
+                evaluation.getEvaluationId(),
+                evaluation.getEvaluatedId(),
+                evaluation.getEvaluatorId(),
+                evaluation.getEvaluationDate(),
+                evaluation.getScores().stream()
+                        .map(score -> new EvaluationScoreDTO(score.getCriterion(), score.getScore()))
+                        .collect(Collectors.toList()),
+                evaluation.getComment(),
+                evaluation.getEvaluationStatus().name()
+        );
+    }
 }
+
+

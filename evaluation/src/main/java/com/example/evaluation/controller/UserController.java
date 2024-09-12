@@ -48,25 +48,16 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
-    /**
-     * METODO TEMPORARIO, APENAS PARA TESTAR O REGISTO DE UTILIZADORES
-     * SE FUNCIONAR, APAGAR O METODO SAVEUSER()
-     * Endpoint para registar um utilizador
-     *
-     * @param request
-     * @return AuthenticationResponse
-     */
+
     @PostMapping("/register")
     public AuthenticationResponse register(@RequestBody RegisterRequest request) {
         System.out.println("Metodo register() de UserController executado.");
         System.out.println("Detalhes da solicitação: " + request.toString());
-
         return authService.register(request);
     }
 
     /**
      * Autenticar um utilizador
-     *
      * @param request
      * @return AuthenticationResponse
      */
@@ -108,7 +99,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error refreshing token: " + e.getMessage());
         }
     }
-//apagar este metodo
+//delete this method
     /*@PostMapping("create")
     public ResponseEntity<String> saveUser(@RequestBody UserRequestDTO data) {
 

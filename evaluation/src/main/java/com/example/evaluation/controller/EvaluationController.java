@@ -31,11 +31,11 @@ public class EvaluationController {
         return evaluationList;
     }
 
-    @PostMapping("create")
+   /* @PostMapping("create")
     public void saveEvaluation(@RequestBody EvaluationRequestDTO data) {
         Evaluation userData = new Evaluation(data);
         evaluationRepository.save(userData);
-    }
+    }*/
 
     @GetMapping
     public ResponseEntity<String> SayHello() {
