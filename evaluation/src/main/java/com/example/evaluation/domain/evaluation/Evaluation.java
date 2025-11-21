@@ -36,6 +36,7 @@ public class Evaluation {
     @Column(name = "comment")
     private String comment;
 
+
     @OneToMany(mappedBy = "evaluation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EvaluationScore> scores; //
 }
